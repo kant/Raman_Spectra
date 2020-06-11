@@ -16,7 +16,6 @@ from PIL import Image
 from PIL import ImageTk
 from functools import partial
 
-QW = 0
 file_name = '0_340_Subt2_01.txt'
 
 #Save .txt into matrix
