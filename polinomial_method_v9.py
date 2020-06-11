@@ -1,6 +1,6 @@
 '''Estatistics dat for Raman spectra
 Update:
-Function optimized
+Search the Max Points of interest in the Flat Spectra
 
 By Edgar Lara
 10-jun-2020
