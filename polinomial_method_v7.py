@@ -1,12 +1,9 @@
-'''Esta versión grafica el .txt y nos da su ajuste polinómico.
+'''Estatistics dat for Raman spectra
 Update:
-Plotea un rango dado.
-El ajuste se restringió solo a los mínimos.
-Se aplanó el espectro.
-Calculo del área bajo el espectro.
+Function optimized
 
 By Edgar Lara
-07-jun-2020
+10-jun-2020
 '''
 import os
 os.system("clear")
@@ -19,7 +16,7 @@ from PIL import Image
 from PIL import ImageTk
 from functools import partial
 
-
+QW = 0
 file_name = '0_340_Subt2_01.txt'
 
 #Save .txt into matrix
