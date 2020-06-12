@@ -70,7 +70,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	root = Tk()
 	root.title('Raman Spectra V8.1')
 	#root.iconbitmap('C:/')
-	root.geometry('600x330')
+	root.geometry('600x380')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
 	def spectra_plot(option_plot):
@@ -185,13 +185,20 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
 			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
+		#Flat spectra fixed, max intensities
+		elif (option_plot == 6):
+			plt.title("Flat spectra\n" + file_name)
+			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
+			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
+			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
 			T = 0
 			for T in range(0, len(Max_X)):
 				plt.plot(Max_X[T], Max_Y[T], 'r*')
-			for T in range (0, len(Positions_X)):
 				plt.annotate(str("{0:.2f}".format(Max_Y[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
 		#Flat spectra area division
-		elif (option_plot == 6):
+		elif (option_plot == 7):
 			plt.title("Flat spectra\n" + file_name)
 			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
@@ -209,7 +216,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
 				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
 		#Full comparison	
-		elif (option_plot == 7):
+		elif (option_plot == 8):
 			plt.title("Full comparison\n" + file_name)
 			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
 			plt.plot(Xsmoth, Ysmoth, label="Regression") #Grafica el ajuste de los puntos
@@ -225,7 +232,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
 		#Espectro final de Raman
-		elif (option_plot == 8):
+		elif (option_plot == 9):
 			plt.title("Flat spectra\n" + file_name)
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
@@ -248,11 +255,13 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra.pack()
 	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro aplanado corregido", command=partial(spectra_plot, 5))
 	my_button_flat_spectra_fixed.pack()
-	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", command=partial(spectra_plot, 6))
+	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro máximos intensidades", command=partial(spectra_plot, 6))
+	my_button_flat_spectra_fixed.pack()
+	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", command=partial(spectra_plot, 7))
 	my_button_flat_spectra.pack()
-	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 7))
+	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
-	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 8))
+	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
 	my_button_full_comparison.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
