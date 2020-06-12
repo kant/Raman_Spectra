@@ -3,7 +3,7 @@ Update:
 Search the Max Points of interest in the Flat Spectra
 
 By Edgar Lara
-10-jun-2020
+11-jun-2020
 '''
 import os
 os.system("clear")
@@ -135,9 +135,12 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			T += 1
 		def area_points ():
 			A = []
+			N = []
 			for T in range(0, len(Max_Y)):
 				A.append(Max_Y[T] * ((X_[Positions_X[T]+Limits_[T][0]])-(X_[Positions_X[T]+Limits_[T][1]])))
-				#A.append(Max_Y[T] * (Limits_[T][0]-Limits_[T][1]))
+				N.append(Limits_[T][0]-Limits_[T][1]+1)
+			for T in range(0, len(Max_Y)):
+				A[T] = A[T]/N[T]
 			#print(A) 
 			return A
 		######################################################################### 
