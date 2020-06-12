@@ -70,12 +70,12 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	root = Tk()
 	root.title('Raman Spectra V8.1')
 	#root.iconbitmap('C:/')
-	root.geometry('600x300')
+	root.geometry('600x330')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
 	def spectra_plot(option_plot):
 		plt.clf()
-		plt.xlabel('Wave lenght')
+		plt.xlabel('Wave lenght (nm)')
 		plt.ylabel('Intensity')
 		plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 		ajuste = numpy.poly1d(numpy.polyfit(X_, Y_, order_))
@@ -203,12 +203,11 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			for T in range(0, len(Max_X)):
 				plt.plot(Max_X[T], Max_Y[T], 'r*')
 			Area_poits = area_points()
-			T = 0 #This is for plot separation between interest points
+			T = 0 #This is for plot separation between interest points and labels of area
 			for T in range (0, len(Area_poits)):
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
 				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
-			
 		#Full comparison	
 		elif (option_plot == 7):
 			plt.title("Full comparison\n" + file_name)
@@ -218,13 +217,22 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.plot(X_, Yflat_, "b-", label="Flat Spectra") #Grafica spectro aplanado
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			pT = 0
+			T = 0
 			for T in range(0, len(Max_X)):
 				plt.plot(Max_X[T], Max_Y[T], 'r*')
 			T = 0 #This is for plot separation between interest points
 			for T in range (0, len(Positions_X)):
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
 				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
+		#Espectro final de Raman
+		elif (option_plot == 8):
+			plt.title("Flat spectra\n" + file_name)
+			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+			Area_poits = area_points()
+			T = 0 #This is for plot separation between interest points
+			for T in range (0, len(Area_poits)):
+				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
 		leg = plt.legend()
 		plt.show()
 	#Botones de interfaz gráfica
@@ -243,6 +251,8 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", command=partial(spectra_plot, 6))
 	my_button_flat_spectra.pack()
 	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 7))
+	my_button_full_comparison.pack()
+	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
