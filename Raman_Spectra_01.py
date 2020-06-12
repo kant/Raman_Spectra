@@ -1,5 +1,6 @@
 '''Release version.
-v01.0
+v01.1
+Updates: Color in close button
 
 By Edgar Lara
 11-jun-2020
@@ -243,7 +244,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra.pack()
 	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 7))
 	my_button_full_comparison.pack()
-	my_button_close = Button(root, text="Close", command=close_window)
+	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
 	root.mainloop()
 
