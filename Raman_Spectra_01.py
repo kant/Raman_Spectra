@@ -15,6 +15,7 @@ from tkinter import  *
 from PIL import Image
 from PIL import ImageTk
 from functools import partial
+import plotly.graph_objects as go
 
 file_name = '0_340_Subt2_01.txt'
 
@@ -161,7 +162,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.title("Polynomial regression\n" + file_name)
 			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
 			#plt.plot(X_, ajuste(X_), label = "Regression") #Grafica el ajuste de los puntos
-			plt.plot(Xsmoth, Ysmoth) #Grafica un ajuste más suave
+			plt.plot(Xsmoth, Ysmoth, label = "Regression") #Grafica un ajuste más suave
 			plt.annotate("r = " + str(math.sqrt(R2)),xy=(575,7500),xytext=(575, 11000))
 			plt.annotate("r^2 = " + str(R2),xy=(575,7500),xytext=(575, 10500))
 		#polinomial regression with mins values
@@ -173,7 +174,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 		elif (option_plot == 4):
 			plt.title("Flat spectra\n" + file_name)
 			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
-			plt.plot(X_, Yflat_, "b-", label="Flat Spectra") #Grafica spectro aplanado
+			plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
 			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
@@ -221,7 +222,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
 			plt.plot(Xsmoth, Ysmoth, label="Regression") #Grafica el ajuste de los puntos
 			plt.plot(Xsmoth, Ysmoth2, label="Regression mins") #Grafica el ajuste de los puntos minimos
-			plt.plot(X_, Yflat_, "b-", label="Flat Spectra") #Grafica spectro aplanado
+			plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 			T = 0
@@ -240,8 +241,15 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			T = 0 #This is for plot separation between interest points
 			for T in range (0, len(Area_poits)):
 				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
+			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
+			fig.show()
 		leg = plt.legend()
 		plt.show()
+		def table_data():
+			#area_points()
+			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
+			fig.show()
+
 	#Botones de interfaz gráfica
 	def close_window(): 
 	    root.destroy()
@@ -261,8 +269,10 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra.pack()
 	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
-	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
+	my_button_full_comparison = Button(root, text="Espectro final y tabla de valores", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
 	my_button_full_comparison.pack()
+	#my_button_full_comparison = Button(root, text="Tabla de valores", bg = '#00838F', fg='white', command=table_data)
+	#my_button_full_comparison.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
 	root.mainloop()
