@@ -119,34 +119,34 @@ def maximo_int (nombre_cadena):
 	print("\n")
 m=1	
 while (m <= n_archivos):
-		if (m >= 10):
-			CA = cad_2
-		else:
-			CA = cad_1
-		CA = CA + str(m) + cad_3
-		print(CA)
-		f = open(CA,'r')
+	if (m >= 10):
+		CA = cad_2
+	else:
+		CA = cad_1
+	CA = CA + str(m) + cad_3
+	print(CA)
+	f = open(CA,'r')
 
-		#declarar matriz y guardar el .txt en esta
-		matriz_datos = []
-		matriz_datos = [line.split() for line in f]
-		f.close()
-		total_datos = len(matriz_datos)
-		#print(total_datos)
+	#declarar matriz y guardar el .txt en esta
+	matriz_datos = []
+	matriz_datos = [line.split() for line in f]
+	f.close()
+	total_datos = len(matriz_datos)
+	#print(total_datos)
 
-
-		T=0
-		while (T < total_datos):
-			X.append(float(matriz_datos[T][0]))
-			Y.append(float(matriz_datos[T][1]))
-			T+=1
-
-		plt.plot(X, Y, "*")
-		plt.title(CA)
-		plt.xlabel('Wave lenght')
-		plt.ylabel('Intensity')
-		plt.show()
-		m+=1
+	T=0
+	del X[:]; del Y[:] #Esto es para limpiar los vectores de datos cada que se abra un archivo
+	while (T < total_datos):
+		X.append(float(matriz_datos[T][0]))
+		Y.append(float(matriz_datos[T][1]))
+		T+=1
+	plt.clf()
+	plt.plot(X, Y, "*")
+	plt.title(CA)
+	plt.xlabel('Wave lenght')
+	plt.ylabel('Intensity')
+	plt.show()
+	m+=1
 
 nombres_archivos(cad_0, cad_1, cad_2, cad_3, n_archivos)
 
