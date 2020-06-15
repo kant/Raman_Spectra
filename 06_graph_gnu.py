@@ -38,3 +38,5 @@ cad_0 += cad_1 + cad_3 + cad_2		#concatenación
 #print(cad_0)
 #print(type(cad_0))
 os.system(cad_0)
+print(cad_0)
+input()

@@ -59,10 +59,12 @@ while (contador < total_datos):
 promedio_lambdas=suma_lambdas/total_datos
 promedio_intensidades=suma_intensidades/total_datos
 #print(contador)
-print("El minimo absoluto es: " + str(minimo))
-print("El maximo absoluto es: " + str(maximo))
-print("Promedio de longitudes de onda: " + str(promedio_lambdas))
-print("Promedio de intensidades: " + str(promedio_intensidades))
-print("Minimo local en el rango: " + str(minimo_rango))
-print("Maximo local en el rango: " + str(maximo_rango))
-print("Valores dentro del rango: " + str(valores_rango))
+print("El minimo absoluto es: " + str("{0:.2f}".format(minimo)))
+print("El maximo absoluto es: " + str("{0:.2f}".format(maximo)))
+print("Promedio de longitudes de onda: " + str("{0:.2f}".format(promedio_lambdas)))
+print("Promedio de intensidades: " + str("{0:.2f}".format(promedio_intensidades)))
+print("Minimo local en el rango: " + str("{0:.2f}".format(minimo_rango)))
+print("Maximo local en el rango: " + str("{0:.2f}".format(maximo_rango)))
+print("Valores dentro del rango: " + str("{0:.2f}".format(valores_rango)))
+
+input()

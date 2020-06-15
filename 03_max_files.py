@@ -51,9 +51,10 @@ def maximo_int (nombre_cadena):
 		#return maximos_rangos[]
 	f.close()
 	#Imprime los datos de interes
+	print("Archivo:" + nombre_cadena)
 	x=0
 	while (x < 4):
-		print("Longitud: " + str(lambdas[x]) + " Maximo intensidad: " + str(maximos_rangos[x]))
+		print("Longitud: " + str("{0:.2f}".format(lambdas[x])) + " Maximo intensidad: " + str("{0:.2f}".format(maximos_rangos[x])))
 		x+=1
 	print("\n")
 
@@ -77,4 +78,4 @@ def nombres_archivos(cadena_0, cadena_1, cadena_2, cadena_3, n_archivos):
 
 
 nombres_archivos(cad_0, cad_1, cad_2, cad_3, n)
-
+input()

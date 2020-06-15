@@ -113,7 +113,7 @@ def maximo_int (nombre_cadena):
 	#Imprime los datos de interes
 	x=0
 	while (x <  n_picos):
-		print("Longitud: " + str(a_picos[x]) + " Maximo intensidad: " + str(maximos_rangos[x]))
+		print("Longitud: " + str("{0:.2f}".format(a_picos[x])) + " Maximo intensidad: " + str("{0:.2f}".format(maximos_rangos[x])))
 		sum_maximos_rangos[x]+=maximos_rangos[x]
 		x+=1
 	print("\n")
@@ -142,6 +142,7 @@ while (m <= n_archivos):
 			T+=1
 
 		plt.plot(X, Y, "*")
+		plt.title(CA)
 		plt.xlabel('Wave lenght')
 		plt.ylabel('Intensity')
 		plt.show()
@@ -152,7 +153,7 @@ nombres_archivos(cad_0, cad_1, cad_2, cad_3, n_archivos)
 x=0
 while (x < n_picos):
 	prom_maximos_rangos[x]=(sum_maximos_rangos[x])/n_archivos
-	print("El promedio del pico " + str(x+1)+": " + str(prom_maximos_rangos[x]))
+	print("El promedio del pico " + str(x+1)+": " + str("{0:.2f}".format(prom_maximos_rangos[x])))
 	x+=1
 
 #print(prom_maximos_rangos)

@@ -46,5 +46,6 @@ while (contador < total_datos):
 #Imprime los datos de interes
 x=0
 while (x < 5):
-	print("Longitud: " + str(lambdas[x]) + " Maximo intensidad: " + str(maximos_rangos[x]))
+	print("Longitud: " + str("{0:.2f}".format(lambdas[x])) + " Maximo intensidad: " + str("{0:.2f}".format(maximos_rangos[x])))
 	x+=1
+input()
