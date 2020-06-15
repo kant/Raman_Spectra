@@ -69,7 +69,7 @@ def mins_in_spectra(X_, Y_, R1_, R2_):
 		U += 1
 	return Xaux2_, Yaux2_	
 #This function is for plot the spectras
-def plotting (X_, Y_, X2_, Y2_, order_):	
+def plotting (X_, Y_, X2_, Y2_, order_):
 	root = Tk()
 	root.title('Espectros de Raman')
 	#root.iconbitmap('C:/')
@@ -123,6 +123,11 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			Area += (Y_[T]-ajuste2(X_[T]))*(X_[T]-X_[T-1])
 			T +=1
 		plt.annotate("Area spectra: " + str("{:.2f}".format(Area)),xy=(575,7500),xytext=(560, 10000))
+		plt.plot(550.91, 7264.95, 'r*')
+		plt.plot(561.195, 3648.61, 'r*')
+		plt.plot(568.028, 2951.7, 'r*')
+		plt.plot(573.146, 2882.83, 'r*')
+		plt.plot(580.631, 1811.39, 'r*')
 		plt.show()
 	def plotting_full_comparison():
 		plt.title("Full comparison\n" + file_name)
@@ -136,6 +141,11 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 		plt.plot(X_, Y_ - ajuste2(X_), "b-", label="Flat Spectra") #Grafica spectro aplanado
 		plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 		leg = plt.legend()
+		plt.plot(550.91, 7264.95, 'r*')
+		plt.plot(561.195, 3648.61, 'r*')
+		plt.plot(568.028, 2951.7, 'r*')
+		plt.plot(573.146, 2882.83, 'r*')
+		plt.plot(580.631, 1811.39, 'r*')
 		plt.show()	
 	def close_window(): 
 	    root.destroy()
@@ -158,7 +168,6 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_close.pack()    
 
 	root.mainloop()
-
 
 
 matrix_data = file_to_matrix(file_name)

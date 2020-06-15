@@ -167,7 +167,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.plot(X_, Yflat_, "b-", label="Flat Spectra") #Grafica spectro aplanado
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			T = 0
+			pT = 0
 			for T in range(0, len(Max_X)):
 				plt.plot(Max_X[T], Max_Y[T], 'r*')
 		leg = plt.legend()

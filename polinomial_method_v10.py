@@ -134,14 +134,20 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			#print("\n")
 			T += 1
 		def area_points ():
-			A = []
-			N = []
+			A = []; N = [0,0,0,0,0]; f = [0,0,0,0,0]; DeltA = [0,0,0,0,0]
 			for T in range(0, len(Max_Y)):
-				A.append(Max_Y[T] * ((X_[Positions_X[T]+Limits_[T][0]])-(X_[Positions_X[T]+Limits_[T][1]])))
-				N.append(Limits_[T][0]-Limits_[T][1]+1)
-			for T in range(0, len(Max_Y)):
-				A[T] = A[T]/N[T]
-			#print(A) 
+				f_ = 0; Delta_X_ = 0
+				for W in range(0, Limits_[T][0]):
+					f_ += Yflat_2_[Positions_X[T]+(W+1)]
+				for W in range(0, abs(Limits_[T][1])):
+					f_ += Yflat_2_[Positions_X[T]-W-1]
+				f_ += Yflat_2_[Positions_X[T]]
+				f[T] = f_
+				A.append(f_)
+				Delta_X_ = (X_[Positions_X[T]+Limits_[T][0]])-(X_[Positions_X[T]+Limits_[T][1]])
+				DeltA[T] = Delta_X_
+				N[T] = (Limits_[T][0]-Limits_[T][1]+1)
+				A[T] = (f[T]/N[T])*DeltA[T]
 			return A
 		######################################################################### 
 		#original spectra
@@ -189,6 +195,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.title("Flat spectra\n" + file_name)
 			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+			plt.scatter(X_, Yflat_2_)
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
 			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
