@@ -72,6 +72,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	root = Tk()
 	root.title('Raman Spectra V8.1')
 	root.geometry('600x400')
+	root.configure(background='#212F3C')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
 	def spectra_plot(option_plot):
@@ -256,21 +257,21 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	    root.destroy()
 	#Graphic interface buttons
 	#########################################################################
-	my_button_original = Button(root, text="Graficar espectro original", command=partial(spectra_plot, 1))
+	my_button_original = Button(root, text="Graficar espectro original", bg = '#283747', fg='white', command=partial(spectra_plot, 1))
 	my_button_original.pack()
-	my_button_polinomial = Button(root, text="Graficar espectro con ajuste", command=partial(spectra_plot, 2))
+	my_button_polinomial = Button(root, text="Graficar espectro con ajuste", bg = '#283747', fg='white', command=partial(spectra_plot, 2))
 	my_button_polinomial.pack()
-	my_button_min_poli = Button(root, text="Graficar espectro con ajuste en mínimos", command = partial(spectra_plot, 3))
+	my_button_min_poli = Button(root, text="Graficar espectro con ajuste en mínimos", bg = '#283747', fg='white', command = partial(spectra_plot, 3))
 	my_button_min_poli.pack()
-	my_button_flat_spectra = Button(root, text="Graficar espectro aplanado", command=partial(spectra_plot, 4))
+	my_button_flat_spectra = Button(root, text="Graficar espectro aplanado", bg = '#283747', fg='white', command=partial(spectra_plot, 4))
 	my_button_flat_spectra.pack()
-	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro aplanado corregido", command=partial(spectra_plot, 5))
+	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro aplanado corregido", bg = '#283747', fg='white', command=partial(spectra_plot, 5))
 	my_button_flat_spectra_fixed.pack()
-	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro máximos intensidades", command=partial(spectra_plot, 6))
+	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro máximos intensidades", bg = '#283747', fg='white', command=partial(spectra_plot, 6))
 	my_button_flat_spectra_fixed.pack()
-	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", command=partial(spectra_plot, 7))
+	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", bg = '#283747', fg='white', command=partial(spectra_plot, 7))
 	my_button_flat_spectra.pack()
-	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 8))
+	my_button_full_comparison = Button(root, text="Graficar todo el proceso", bg = '#283747', fg='white', command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
 	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
 	my_button_full_comparison.pack()
