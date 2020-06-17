@@ -1,6 +1,6 @@
 '''Release version.
 v01.1
-Updates: Color in close button
+Updates: Comments added
 
 By Edgar Lara
 11-jun-2020
@@ -68,9 +68,9 @@ def mins_in_spectra(X_, Y_, R1_, R2_):
 	return Xaux2_, Yaux2_	
 #This function is for plot the spectra
 def plotting (X_, Y_, X2_, Y2_, order_):
+	#This is for graphic interface
 	root = Tk()
 	root.title('Raman Spectra V8.1')
-	#root.iconbitmap('C:/')
 	root.geometry('600x380')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
@@ -134,6 +134,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			#print("Left" +str(T+1) +": " + str(Limits_[T][1]))
 			#print("\n")
 			T += 1
+		#Area under specific points
 		def area_points ():
 			A = []; N = [0,0,0,0,0]; f = [0,0,0,0,0]; DeltA = [0,0,0,0,0]
 			for T in range(0, len(Max_Y)):
@@ -150,6 +151,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 				N[T] = (Limits_[T][0]-Limits_[T][1]+1)
 				A[T] = (f[T]/N[T])*DeltA[T]
 			return A
+		#This if else sequence is for every button in graphic interface
 		######################################################################### 
 		#original spectra
 		if (option_plot == 1):
@@ -241,18 +243,16 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			T = 0 #This is for plot separation between interest points
 			for T in range (0, len(Area_poits)):
 				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
+			#Show the table with data of WaveLenght, Intensity and Area. 
 			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
 			fig.show()
 		leg = plt.legend()
 		plt.show()
-		def table_data():
-			#area_points()
-			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
-			fig.show()
 
-	#Botones de interfaz gráfica
 	def close_window(): 
 	    root.destroy()
+	#Graphic interface buttons
+	#########################################################################
 	my_button_original = Button(root, text="Graficar espectro original", command=partial(spectra_plot, 1))
 	my_button_original.pack()
 	my_button_polinomial = Button(root, text="Graficar espectro con ajuste", command=partial(spectra_plot, 2))
@@ -271,13 +271,11 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_full_comparison.pack()
 	my_button_full_comparison = Button(root, text="Espectro final y tabla de valores", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
 	my_button_full_comparison.pack()
-	#my_button_full_comparison = Button(root, text="Tabla de valores", bg = '#00838F', fg='white', command=table_data)
-	#my_button_full_comparison.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
 	root.mainloop()
-
-
+#Calling the functions defined above
+#########################################################################
 matrix_data = file_to_matrix(file_name)
 x, y = list_to_float(matrix_data)
 #rango = [min(x), max(x)-3]
