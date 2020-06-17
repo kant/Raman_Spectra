@@ -1,5 +1,6 @@
-'''Release version.
-v01.1
+'''Program for analisis of spectra
+Release version.
+v8.2
 Updates: Interface look changed
 
 By Edgar Lara
@@ -70,7 +71,7 @@ def mins_in_spectra(X_, Y_, R1_, R2_):
 def plotting (X_, Y_, X2_, Y2_, order_):
 	#This is for graphic interface
 	root = Tk()
-	root.title('Raman Spectra V8.1')
+	root.title('Raman Spectra V8.2')
 	root.geometry('600x400')
 	root.configure(background='#212F3C')
 	option_plot = 0
