@@ -1,9 +1,9 @@
 '''Release version.
 v01.1
-Updates: Comments added
+Updates: Interface look changed
 
 By Edgar Lara
-11-jun-2020
+13-jun-2020
 '''
 import os
 os.system("clear")
