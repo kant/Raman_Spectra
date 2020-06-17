@@ -71,7 +71,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	#This is for graphic interface
 	root = Tk()
 	root.title('Raman Spectra V8.1')
-	root.geometry('600x380')
+	root.geometry('600x400')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
 	def spectra_plot(option_plot):
@@ -240,14 +240,17 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
 			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
 			Area_poits = area_points()
-			T = 0 #This is for plot separation between interest points
+			T = 0 #This is for plot 'separation lines' between interest points
 			for T in range (0, len(Area_poits)):
 				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
-			#Show the table with data of WaveLenght, Intensity and Area. 
+		#Show the table with data of WaveLenght, Intensity and Area. 
+		elif (option_plot == 10):
+			Area_poits = area_points()
 			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
 			fig.show()
-		leg = plt.legend()
-		plt.show()
+		if (option_plot  > 0) and (option_plot < 10):
+			leg = plt.legend()
+			plt.show()
 
 	def close_window(): 
 	    root.destroy()
@@ -269,7 +272,9 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra.pack()
 	my_button_full_comparison = Button(root, text="Graficar todo el proceso", command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
-	my_button_full_comparison = Button(root, text="Espectro final y tabla de valores", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
+	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
+	my_button_full_comparison.pack()
+	my_button_full_comparison = Button(root, text="Tabla de valores", bg = '#00838F', fg='white', command=partial(spectra_plot, 10))
 	my_button_full_comparison.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
