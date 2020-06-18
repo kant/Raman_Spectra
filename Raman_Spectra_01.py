@@ -1,9 +1,9 @@
-'''Release version.
-v01.1
-Updates: Comments added
+'''Program for analisis of spectra
+Release version.
+v8.3
 
 By Edgar Lara
-11-jun-2020
+13-jun-2020
 '''
 import os
 os.system("clear")
