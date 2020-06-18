@@ -1,6 +1,9 @@
 '''Program for analisis of spectra
 Release version.
 v8.3
+Updates:
+	*	Last button splited in 2 different buttons
+	*	Palette of interface changed
 
 By Edgar Lara
 13-jun-2020
@@ -71,7 +74,7 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	#This is for graphic interface
 	root = Tk()
 	root.title('Raman Spectra V8.1')
-	root.geometry('600x380')
+	root.geometry('600x400')
 	root.configure(background='#212F3C')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
