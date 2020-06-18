@@ -1,10 +1,9 @@
-'''Program for analisis of spectra
-Release version.
-v8.2
-Updates: Interface look changed
+'''Release version.
+v01.1
+Updates: Comments added
 
 By Edgar Lara
-13-jun-2020
+11-jun-2020
 '''
 import os
 os.system("clear")
@@ -71,8 +70,8 @@ def mins_in_spectra(X_, Y_, R1_, R2_):
 def plotting (X_, Y_, X2_, Y2_, order_):
 	#This is for graphic interface
 	root = Tk()
-	root.title('Raman Spectra V8.2')
-	root.geometry('600x400')
+	root.title('Raman Spectra V8.1')
+	root.geometry('600x380')
 	root.configure(background='#212F3C')
 	option_plot = 0
 	#This funcion is for choose between different graphs.
@@ -153,109 +152,109 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 				N[T] = (Limits_[T][0]-Limits_[T][1]+1)
 				A[T] = (f[T]/N[T])*DeltA[T]
 			return A
+		Area_poits = area_points()
 		#This if else sequence is for every button in graphic interface
-		######################################################################### 
-		#original spectra
-		if (option_plot == 1):
-			plt.title("Original spectra\n" + file_name)
-			plt.scatter(X_, Y_)
-			plt.plot(X_, Y_, '-',label='Spectra') #Une los puntos del espectro
-		#polinomial regression
-		elif (option_plot == 2):
-			R2 = r2_score(Y_, ajuste(X_))
-			plt.title("Polynomial regression\n" + file_name)
-			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
-			#plt.plot(X_, ajuste(X_), label = "Regression") #Grafica el ajuste de los puntos
-			plt.plot(Xsmoth, Ysmoth, label = "Regression") #Grafica un ajuste más suave
-			plt.annotate("r = " + str(math.sqrt(R2)),xy=(575,7500),xytext=(575, 11000))
-			plt.annotate("r^2 = " + str(R2),xy=(575,7500),xytext=(575, 10500))
-		#polinomial regression with mins values
-		elif (option_plot == 3):
-			plt.title("Polynomial regression with minimal values\n" + file_name)
-			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
-			plt.plot(Xsmoth, Ysmoth2, label="Regression with mins") #Grafica el ajuste de los puntos minimos
-		#Flat spectra
-		elif (option_plot == 4):
-			plt.title("Flat spectra\n" + file_name)
-			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
-			plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
-			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
-		#Flat spectra fixed
-		elif (option_plot == 5):
-			plt.title("Flat spectra\n" + file_name)
-			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
-			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
-			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
-		#Flat spectra fixed, max intensities
-		elif (option_plot == 6):
-			plt.title("Flat spectra\n" + file_name)
-			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
-			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
-			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
-			T = 0
-			for T in range(0, len(Max_X)):
-				plt.plot(Max_X[T], Max_Y[T], 'r*')
-				plt.annotate(str("{0:.2f}".format(Max_Y[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
-		#Flat spectra area division
-		elif (option_plot == 7):
-			plt.title("Flat spectra\n" + file_name)
-			#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
-			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
-			plt.scatter(X_, Yflat_2_)
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
-			plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
-			T = 0
-			for T in range(0, len(Max_X)):
-				plt.plot(Max_X[T], Max_Y[T], 'r*')
-			Area_poits = area_points()
-			T = 0 #This is for plot separation between interest points and labels of area
-			for T in range (0, len(Area_poits)):
-				plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
-				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
-				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
-		#Full comparison	
-		elif (option_plot == 8):
-			plt.title("Full comparison\n" + file_name)
-			plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
-			plt.plot(Xsmoth, Ysmoth, label="Regression") #Grafica el ajuste de los puntos
-			plt.plot(Xsmoth, Ysmoth2, label="Regression mins") #Grafica el ajuste de los puntos minimos
-			plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
-			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			T = 0
-			for T in range(0, len(Max_X)):
-				plt.plot(Max_X[T], Max_Y[T], 'r*')
-			T = 0 #This is for plot separation between interest points
-			for T in range (0, len(Positions_X)):
-				plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
-				plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
-		#Espectro final de Raman
-		elif (option_plot == 9):
-			plt.title("Flat spectra\n" + file_name)
-			plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
-			plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
-			Area_poits = area_points()
-			T = 0 #This is for plot 'separation lines' between interest points
-			for T in range (0, len(Area_poits)):
-				plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
-		#Show the table with data of WaveLenght, Intensity and Area. 
-		elif (option_plot == 10):
-			Area_poits = area_points()
-			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
-			fig.show()
-		if (option_plot  > 0) and (option_plot < 10):
+		#########################################################################
+		if (option_plot >= 1) and (option_plot < 10):
+			#original spectra
+			if (option_plot == 1):
+				plt.title("Original spectra\n" + file_name)
+				plt.scatter(X_, Y_)
+				plt.plot(X_, Y_, '-',label='Spectra') #Une los puntos del espectro
+			#polinomial regression
+			elif (option_plot == 2):
+				R2 = r2_score(Y_, ajuste(X_))
+				plt.title("Polynomial regression\n" + file_name)
+				plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
+				#plt.plot(X_, ajuste(X_), label = "Regression") #Grafica el ajuste de los puntos
+				plt.plot(Xsmoth, Ysmoth, label = "Regression") #Grafica un ajuste más suave
+				plt.annotate("r = " + str(math.sqrt(R2)),xy=(575,7500),xytext=(575, 11000))
+				plt.annotate("r^2 = " + str(R2),xy=(575,7500),xytext=(575, 10500))
+			#polinomial regression with mins values
+			elif (option_plot == 3):
+				plt.title("Polynomial regression with minimal values\n" + file_name)
+				plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
+				plt.plot(Xsmoth, Ysmoth2, label="Regression with mins") #Grafica el ajuste de los puntos minimos
+			#Flat spectra
+			elif (option_plot == 4):
+				plt.title("Flat spectra\n" + file_name)
+				#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
+				plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
+				plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
+			#Flat spectra fixed
+			elif (option_plot == 5):
+				plt.title("Flat spectra\n" + file_name)
+				#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
+				plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
+				plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
+			#Flat spectra fixed, max intensities
+			elif (option_plot == 6):
+				plt.title("Flat spectra\n" + file_name)
+				#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
+				plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
+				plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
+				T = 0
+				for T in range(0, len(Max_X)):
+					plt.plot(Max_X[T], Max_Y[T], 'r*')
+					plt.annotate(str("{0:.2f}".format(Max_Y[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
+			#Flat spectra area division
+			elif (option_plot == 7):
+				plt.title("Flat spectra\n" + file_name)
+				#ajuste2 = numpy.poly1d(numpy.polyfit(X2_, Y2_, order_))
+				plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+				plt.scatter(X_, Yflat_2_)
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				plt.axvline(x=540, color='r', linestyle='-') #linea cte en x=540
+				plt.axvline(x=600, color='r', linestyle='-') #linea cte en x=600
+				T = 0
+				for T in range(0, len(Max_X)):
+					plt.plot(Max_X[T], Max_Y[T], 'r*')
+				Area_poits = area_points()
+				T = 0 #This is for plot separation between interest points and labels of area
+				for T in range (0, len(Area_poits)):
+					plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
+					plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
+					plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
+			#Full comparison	
+			elif (option_plot == 8):
+				plt.title("Full comparison\n" + file_name)
+				plt.plot(X_, Y_, "-", label="Spectra") #Une los puntos del espectro
+				plt.plot(Xsmoth, Ysmoth, label="Regression") #Grafica el ajuste de los puntos
+				plt.plot(Xsmoth, Ysmoth2, label="Regression mins") #Grafica el ajuste de los puntos minimos
+				plt.plot(X_, Yflat_, "-", label="Flat Spectra") #Grafica spectro aplanado
+				plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				T = 0
+				for T in range(0, len(Max_X)):
+					plt.plot(Max_X[T], Max_Y[T], 'r*')
+				T = 0 #This is for plot separation between interest points
+				for T in range (0, len(Positions_X)):
+					plt.axvline(x=X_[Positions_X[T]+Limits_[T][0]], color='r', linestyle='-')
+					plt.axvline(x=X_[Positions_X[T]+Limits_[T][1]], color='r', linestyle='-')
+			#Espectro final de Raman
+			elif (option_plot == 9):
+				plt.title("Flat spectra\n" + file_name)
+				plt.plot(X_, Yflat_2_, "b-", label="Flat Spectra Fixed") #Grafica spectro aplanado
+				plt.axhline(y=0, color='r', linestyle='-') #linea cte en y=0
+				T = 0 #This is for plot separation between interest points
+				for T in range (0, len(Area_poits)):
+					plt.annotate(str("{0:.2f}".format(Area_poits[T])),xy=(Max_X[T],Max_Y[T]),xytext=(Max_X[T], Max_Y[T]))
 			leg = plt.legend()
 			plt.show()
+		elif (option_plot == 10):
+			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
+			fig.show()
 
 	def close_window(): 
 	    root.destroy()
+	    exit()
+	    
 	#Graphic interface buttons
 	#########################################################################
 	my_button_original = Button(root, text="Graficar espectro original", bg = '#283747', fg='white', command=partial(spectra_plot, 1))
@@ -268,16 +267,16 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	my_button_flat_spectra.pack()
 	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro aplanado corregido", bg = '#283747', fg='white', command=partial(spectra_plot, 5))
 	my_button_flat_spectra_fixed.pack()
-	my_button_flat_spectra_fixed = Button(root, text="Graficar espectro máximos intensidades", bg = '#283747', fg='white', command=partial(spectra_plot, 6))
-	my_button_flat_spectra_fixed.pack()
-	my_button_flat_spectra = Button(root, text="Graficar espectro con areas", bg = '#283747', fg='white', command=partial(spectra_plot, 7))
-	my_button_flat_spectra.pack()
+	my_button_flat_spec_inten = Button(root, text="Graficar espectro máximos intensidades", bg = '#283747', fg='white', command=partial(spectra_plot, 6))
+	my_button_flat_spec_inten.pack()
+	my_button_flat_spectra_area = Button(root, text="Graficar espectro con areas", bg = '#283747', fg='white', command=partial(spectra_plot, 7))
+	my_button_flat_spectra_area.pack()
 	my_button_full_comparison = Button(root, text="Graficar todo el proceso", bg = '#283747', fg='white', command=partial(spectra_plot, 8))
 	my_button_full_comparison.pack()
-	my_button_full_comparison = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
-	my_button_full_comparison.pack()
-	my_button_full_comparison = Button(root, text="Tabla de valores", bg = '#00838F', fg='white', command=partial(spectra_plot, 10))
-	my_button_full_comparison.pack()
+	my_button_final_spectra = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 9))
+	my_button_final_spectra.pack()
+	my_button_table_data = Button(root, text="Tabla de resultados", bg = '#00838F', fg='white', command=partial(spectra_plot, 10))
+	my_button_table_data.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
 	root.mainloop()
