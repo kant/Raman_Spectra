@@ -12,4 +12,4 @@ _This report was presented on jun 17, 2020._
 
 ## Credits
 
-Colaboration with @Uriel128 and Photoacoustic Lab, DCI-UG.
+Colaboration with [Uriel128](https://github.com/Uriel148?tab=repositories) and Photoacoustic Lab, DCI-UG.
