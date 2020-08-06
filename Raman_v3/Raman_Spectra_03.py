@@ -1,23 +1,15 @@
 '''Program for analisis of spectra
-Release version.
-v8.3
 Updates:
-	*	Last button splited in 2 different buttons
-	*	Palette of interface changed
+	*	
 
 By Edgar Lara
-13-jun-2020
+Created: Aug 08, 2020
 '''
 import os
 os.system("clear")
 import numpy# as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score
-import math
 from tkinter import  *
-from PIL import Image
-from PIL import ImageTk
-from functools import partial
 import plotly.graph_objects as go
 
 file_name = '0_340_Subt2_01.txt'
@@ -183,18 +175,17 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 		elif (option_plot == 10):
 			fig = go.Figure(data=[go.Table(header=dict(values=['Longitud de onda', 'Intensidad', 'Area']), cells=dict(values=[Max_X, Max_Y, Area_poits]))])
 			fig.show()
-
 	def close_window(): 
 	    root.destroy()
 	    exit()
 	    
 	#Graphic interface buttons
 	#########################################################################
-	my_button_flat_spec_inten = Button(root, text="Graficar espectro máximos intensidades", bg = '#283747', fg='white', command=partial(spectra_plot, 1))
+	my_button_flat_spec_inten = Button(root, text="Espectro - máximos intensidades", bg = '#00838F', fg='white', command=lambda: spectra_plot(1))
 	my_button_flat_spec_inten.pack()
-	my_button_final_spectra = Button(root, text="Espectro final", bg = '#00838F', fg='white', command=partial(spectra_plot, 2))
+	my_button_final_spectra = Button(root, text="Espectro - Area picos", bg = '#00838F', fg='white', command=lambda: spectra_plot(2))
 	my_button_final_spectra.pack()
-	my_button_table_data = Button(root, text="Tabla de resultados", bg = '#00838F', fg='white', command=partial(spectra_plot, 10))
+	my_button_table_data = Button(root, text="Tabla de resultados", bg = '#00838F', fg='white', command=lambda: spectra_plot(10))
 	my_button_table_data.pack()
 	my_button_close = Button(root, text="Close", bg ='red', fg='white', command=close_window)
 	my_button_close.pack()    
@@ -207,7 +198,5 @@ x, y = list_to_float(matrix_data)
 rango = [540, 600]
 Xaux, Yaux = range1_to_range2(x, y, rango[0],rango[1])
 Xaux2, Yaux2 = mins_in_spectra(x, y, rango[0],rango[1])
-#order = int(input("Polinomial order: "))
 order = 8
 plotting(Xaux, Yaux, Xaux2, Yaux2, order)
-#input("\n\nClick enter to close")
