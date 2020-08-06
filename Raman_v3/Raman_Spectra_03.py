@@ -16,12 +16,17 @@ file_name = '0_340_Subt2_01.txt'
 
 #Save .txt into matrix
 def file_to_matrix (name):
+	matrix = []; X_ = []; Y_ = []; T=0
 	f = open(name,'r')
-	matrix = []
 	matrix = [line.split() for line in f]
 	f.close()
-	return matrix
-
+	while (T < len(matrix)):
+		X_.append(float(matrix[T][0]))
+		Y_.append(float(matrix[T][1]))
+		T+=1
+	return X_,Y_
+	#return matrix
+'''
 #Split matrix into vector and convert to float each term in vectors
 def list_to_float (matrix):
 	X_ = []
@@ -31,7 +36,9 @@ def list_to_float (matrix):
 		X_.append(float(matrix[T][0]))
 		Y_.append(float(matrix[T][1]))
 		T+=1
-	return X_,Y_		
+	return X_,Y_
+'''
+
 #From the entire wavelenght data, now collect in range (540,600)nm
 def range1_to_range2(X_, Y_, R1_, R2_):
 	T = 0
@@ -192,8 +199,10 @@ def plotting (X_, Y_, X2_, Y2_, order_):
 	root.mainloop()
 #Calling the functions defined above
 #########################################################################
-matrix_data = file_to_matrix(file_name)
-x, y = list_to_float(matrix_data)
+#matrix_data = file_to_matrix(file_name)
+#x, y = list_to_float(matrix_data)
+
+x, y = file_to_matrix(file_name)
 #rango = [min(x), max(x)-3]
 rango = [540, 600]
 Xaux, Yaux = range1_to_range2(x, y, rango[0],rango[1])
